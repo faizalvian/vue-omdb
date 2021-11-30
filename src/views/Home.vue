@@ -37,21 +37,21 @@
 <script>
 // @ is an alias to /src
 import Navbar from "@/components/Navbar.vue";
-import Hero from "@/components/Hero.vue";
 import { ref } from "vue";
+import env from '@/env.js'
 
 export default {
   name: "Home",
+  title:"VueMovie | Home",
   components: {
-    Navbar,
-    Hero
+    Navbar
   },
   setup() {
     const search = ref("");
     const movies = ref([]);
     const SearchMovies = () => {
       if (search.value != "") {
-        fetch(`http://www.omdbapi.com/?apikey=53f4a2b8&s=${search.value}`)
+        fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&s=${search.value}`)
         .then(response => response.json())
         .then(data => {
           movies.value = data.Search;
